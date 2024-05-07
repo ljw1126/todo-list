@@ -4,6 +4,7 @@
   --color-grey: #d1d1d1;
   --color-text: #22243b;
   --color-accent: #f16e03;
+  --color-white: white;
 }
 
 body {
@@ -22,6 +23,8 @@ body {
 
   background: rgb(34,193,195);
   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+
+  font-size: 1.2rem;
 }
 
 #root {
@@ -52,4 +55,9 @@ ul {
 button {
   outline: none;
   border: none;
+}
+
+/*모든 아이템 대상 8.14*/
+* {
+  box-sizing: border-box;
 }
