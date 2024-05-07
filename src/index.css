@@ -5,6 +5,7 @@
   --color-text: #22243b;
   --color-accent: #f16e03;
   --color-white: white;
+  --color-mint: #cfffe5;
 }
 
 body {
@@ -27,7 +28,7 @@ body {
   font-size: 1.2rem;
 
   /*체크 박스 선택 색상을 브라우저 기본 색상말고 아래 지정*/
-  accent-color: var(--color-accent);
+  accent-color: var(--color-mint);
 }
 
 #root {
