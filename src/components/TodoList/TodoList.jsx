@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import AddTodo from "../AddTodo/AddTodo";
+import TodoItem from "../Todo/TodoItem";
+
 
 export default function TodoList() {
     const [todos, setTodos] = useState(initData);
@@ -8,12 +10,19 @@ export default function TodoList() {
         setTodos([...todos, todo]);
     }
 
+    const handleUpdate = (updated) => {
+        setTodos(todos.map(t => t.id === updated.id ? updated : t));
+    }
+    const handleDelete = (deleted) => {
+        setTodos(todos.filter(t => t.id !== deleted.id));
+    };
+
     return (
         <section>
             <ul>
                 {
                     todos.map(item => (
-                        <li key={item.id}>{item.text}</li>
+                        <TodoItem key={item.id} todo={item} onUpdate={handleUpdate} onDelete={handleDelete}/>
                     ))
                 }
             </ul>
@@ -31,7 +40,7 @@ const initData = [
     {
         id: '2',
         text: '공부하기',
-        status: 'in-active'
+        status: 'active'
     }
 ]
 
