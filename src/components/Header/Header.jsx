@@ -3,6 +3,7 @@ import React, {useState} from "react";
 export default function Header({filters, filter, onFilterChange}) {
     return (
         <header>
+            <ul>
             {
                 filters.map((value, index) => (
                     <li key={index}>
@@ -10,6 +11,7 @@ export default function Header({filters, filter, onFilterChange}) {
                     </li>
                 ))
             }
+            </ul>
         </header>
     );
 }
