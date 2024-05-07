@@ -5,7 +5,6 @@ export default function TodoList() {
     const [todos, setTodos] = useState(initData);
 
     const handleAdd = (todo) => {
-        todo.id = todos.length + 1;
         setTodos([...todos, todo]);
     }
 
