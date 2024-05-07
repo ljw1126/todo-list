@@ -1,7 +1,13 @@
 import React, {useState} from "react";
+import AddTodo from "../AddTodo/AddTodo";
 
 export default function TodoList() {
     const [todos, setTodos] = useState(initData);
+
+    const handleAdd = (todo) => {
+        todo.id = todos.length + 1;
+        setTodos([...todos, todo]);
+    }
 
     return (
         <section>
@@ -12,6 +18,7 @@ export default function TodoList() {
                     ))
                 }
             </ul>
+            <AddTodo onAdd={handleAdd}/>
         </section>
     );
 }
