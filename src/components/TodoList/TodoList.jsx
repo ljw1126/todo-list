@@ -3,7 +3,7 @@ import AddTodo from "../AddTodo/AddTodo";
 import TodoItem from "../Todo/TodoItem";
 
 
-export default function TodoList() {
+export default function TodoList({filter}) {
     const [todos, setTodos] = useState(initData);
 
     const handleAdd = (todo) => {
@@ -17,11 +17,13 @@ export default function TodoList() {
         setTodos(todos.filter(t => t.id !== deleted.id));
     };
 
+    const filtered = getFilteredItems(todos, filter)
+
     return (
         <section>
             <ul>
                 {
-                    todos.map(item => (
+                    filtered.map(item => (
                         <TodoItem key={item.id} todo={item} onUpdate={handleUpdate} onDelete={handleDelete}/>
                     ))
                 }
@@ -42,5 +44,18 @@ const initData = [
         text: '공부하기',
         status: 'active'
     }
-]
+];
 
+function getFilteredItems(todos, filter) {
+    if(filter === 'all') {
+        return todos;
+    }
+
+    if(filter === 'active') {
+        return todos.filter(t => t.status === 'active');
+    }
+
+    if(filter === 'completed') {
+        return todos.filter(t => t.status === 'completed');
+    }
+}
