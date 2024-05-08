@@ -1,21 +1,29 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AddTodo from "../AddTodo/AddTodo";
 import TodoItem from "../Todo/TodoItem";
 import styles from "./TodoList.module.css";
 
 export default function TodoList({filter}) {
-    const [todos, setTodos] = useState(initData);
+    const [todos, setTodos] = useState(() => readTodos());
 
     const handleAdd = (todo) => {
-        setTodos([...todos, todo]);
+        const data = [...todos, todo];
+        setTodos(data);
     }
 
     const handleUpdate = (updated) => {
-        setTodos(todos.map(t => t.id === updated.id ? updated : t));
+        const data = todos.map(t => t.id === updated.id ? updated : t);
+        setTodos(data);
     }
     const handleDelete = (deleted) => {
-        setTodos(todos.filter(t => t.id !== deleted.id));
+        const data = todos.filter(t => t.id !== deleted.id);
+        setTodos(data);
     };
+
+    useEffect(() => {
+        localStorage.setItem("todoItems", JSON.stringify(todos));
+    }, [todos]);
+
 
     const filtered = getFilteredItems(todos, filter)
 
@@ -33,19 +41,6 @@ export default function TodoList({filter}) {
     );
 }
 
-const initData = [
-    {
-        id: '1',
-        text: '장보기',
-        status: 'active'
-    },
-    {
-        id: '2',
-        text: '공부하기',
-        status: 'active'
-    }
-];
-
 function getFilteredItems(todos, filter) {
     if(filter === 'all') {
         return todos;
@@ -59,3 +54,9 @@ function getFilteredItems(todos, filter) {
         return todos.filter(t => t.status === 'completed');
     }
 }
+
+function readTodos() {
+    const todoItems = localStorage.getItem("todoItems");
+    return todoItems ? JSON.parse(todoItems) : [];
+}
+
