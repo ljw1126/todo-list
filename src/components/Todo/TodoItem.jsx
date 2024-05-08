@@ -2,7 +2,7 @@ import React from "react";
 import {LuTrash2 as TrashCan} from "react-icons/lu";
 import styles from "./TodoItem.module.css";
 export default function TodoItem({todo, onUpdate, onDelete}) {
-    const {text, status} = todo;
+    const {id, text, status} = todo;
     const handleChange = (e) => {
         const status = e.target.checked ? 'completed' : 'active';
         onUpdate({...todo, status});
@@ -15,8 +15,10 @@ export default function TodoItem({todo, onUpdate, onDelete}) {
             <input type="checkbox"
                    className={styles.checkbox}
                    onChange={handleChange}
-                   checked={status === 'completed'}/>
-            <label htmlFor="checkbox" className={styles.text}>{text}</label>
+                   checked={status === 'completed'}
+                   id={id}
+            />
+            <label htmlFor={id} className={styles.text}>{text}</label>
             <span className={styles.icon}>
                  <button className={styles.button} onClick={handleDelete}><TrashCan/></button>
             </span>
